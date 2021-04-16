@@ -1,7 +1,9 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import "./App.css";
 
-const data = [
+type Meal = { key: number; name: string };
+
+const data: Meal[] = [
   { key: 1, name: "Mac Cheese" },
   { key: 2, name: "Roast chicken" },
   { key: 3, name: "Fajita" },
@@ -10,7 +12,7 @@ const data = [
   { key: 6, name: "Prawn Masala" },
   { key: 7, name: "Beans and rice" },
   { key: 8, name: "Sugar Snap Pea and Carrot Soba Noodles" },
-  { key: 9, name: "Eggs on Toast" }
+  { key: 9, name: "Eggs on Toast" },
 ];
 
 // Challenge:
@@ -30,11 +32,11 @@ const data = [
 //
 // Good luck!
 
-function App() {
+const App: FunctionComponent = () => {
   const allMeals = data;
   const remainingSuggestions = allMeals;
-  const chosenMeals = [];
-  const rejectedMeals = [];
+  const chosenMeals: Meal[] = [];
+  const rejectedMeals: Meal[] = [];
 
   return (
     <div>
@@ -42,7 +44,7 @@ function App() {
 
       <h2>Remaining suggestions</h2>
       <ul>
-        {remainingSuggestions.map(meal => {
+        {remainingSuggestions.map((meal) => {
           return (
             <li key={meal.key}>
               <span>{meal.name}</span>
@@ -55,19 +57,19 @@ function App() {
 
       <h2>Chosen meals</h2>
       <ul>
-        {chosenMeals.map(meal => {
+        {chosenMeals.map((meal) => {
           return <li key={meal.key}>{meal.name}</li>;
         })}
       </ul>
 
       <h2>Rejected meals</h2>
       <ul>
-        {rejectedMeals.map(meal => {
+        {rejectedMeals.map((meal) => {
           return <li key={meal.key}>{meal.name}</li>;
         })}
       </ul>
     </div>
   );
-}
+};
 
 export default App;
