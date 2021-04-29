@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState} from "react";
 import "./App.css";
 
 type Meal = { key: number; name: string };
@@ -34,9 +34,39 @@ const data: Meal[] = [
 
 const App: FunctionComponent = () => {
   const allMeals = data;
-  const remainingSuggestions = allMeals;
-  const chosenMeals: Meal[] = [];
-  const rejectedMeals: Meal[] = [];
+  //const remainingSuggestions = allMeals;
+  //const chosenMeals: Meal[] = [];
+  // const rejectedMeals: Meal[] = [];
+
+  const [remainingSuggestions, setRemainingSuggestions] = useState<Meal[]>(allMeals)
+  const [chosenMeals, setChosenMeals] = useState<Meal[]>([])
+  const [rejectedMeals, setRejectedMeals] = useState<Meal[]>([])
+
+  /* You have to force re-render by copying the Meal arrays to a new object
+  and work your changes on that object */
+  const handlePick = (key: number, name: string) => {
+    const idx = remainingSuggestions.findIndex(arr => arr.key === key);
+    const newRemainingSuggestions : Meal[]  = [...remainingSuggestions];
+    newRemainingSuggestions.splice(idx,1);
+    setRemainingSuggestions(newRemainingSuggestions);
+    const newChosenMeals : Meal [] = [...chosenMeals];
+    newChosenMeals.push({"key":key, "name":name});
+    setChosenMeals(newChosenMeals);
+  }
+
+  const handleReject = (key: number, name: string) => {
+    const idx = remainingSuggestions.findIndex(arr => arr.key === key);
+    const newRemainingSuggestions : Meal[]  = [...remainingSuggestions];
+    newRemainingSuggestions.splice(idx,1);
+    setRemainingSuggestions(newRemainingSuggestions);
+    const newRejectedMeals : Meal [] = [...rejectedMeals];
+    newRejectedMeals.push({"key":key, "name":name});
+    setRejectedMeals(newRejectedMeals);
+  }
+
+  useEffect (() => {
+
+  })
 
   return (
     <div>
@@ -48,8 +78,8 @@ const App: FunctionComponent = () => {
           return (
             <li key={meal.key}>
               <span>{meal.name}</span>
-              <button>Pick</button>
-              <button>Reject</button>
+              <button onClick={() => handlePick(meal.key, meal.name)}>Pick</button>
+              <button onClick={() => handleReject(meal.key, meal.name)}>Reject</button>
             </li>
           );
         })}
