@@ -2,3 +2,34 @@ span {
     display: inline-block;
     width: 500px;
 }
+
+button {
+    width: 100px;
+    border-radius: 5px;
+    margin-left: 5px;
+    color: white;
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+.greenBtn {
+    background-color: green;
+}
+
+.greenBtn:hover {
+    background-color: rgb(47, 224, 47);
+}
+
+.greenBtn:active {
+    background-color: rgb(47, 224, 47);
+}
+
+.redBtn {
+    background-color: red
+}
+
+.redBtn:hover {
+    background-color: rgb(255, 96, 96)
+}
